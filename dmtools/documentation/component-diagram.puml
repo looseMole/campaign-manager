@@ -1,0 +1,15 @@
+@startuml
+[CommonClass] as cclass
+[CommonRace] as crace
+[Data] as data
+[Player] as player
+[Web] as web
+[Core] as core
+[5eRace] as 5er
+[5eClass] as 5ec
+
+5er -up-|> crace
+5ec -up-|> cclass
+
+'-(0- A lollipop "arrow."'
+@enduml
