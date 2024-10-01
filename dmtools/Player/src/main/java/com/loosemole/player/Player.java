@@ -25,6 +25,9 @@ public class Player {
     private int hp = 10;
     private int speed = 30;
 
+    /*
+    Minimal constructor for a Player object. Not recommended for use in production.
+     */
     public Player(String name) {
         this.name = name;
         this.alignment = Alignments.NN;
@@ -39,30 +42,26 @@ public class Player {
     }
 
     /*
+    Factory pattern constructor for a Player object. Recommended for use in production.
+     */
+    // TODO: Implement factory pattern for Player object creation
+
+    /*
     Should be used to calculate stats like start HP & AC, based on Player's ability scores.
      */
     private void calculateStats() {
         // Base HP
         DiceTypes hitdie = DiceTypes.D10; // TODO get hit-die from player's first class
-        int healthPoints;
+
         /*
-        5e starting hp is calculated with the formula <hitdie-max>(CON-10)/2, rounded down.
+        5e starting hp is calculated with the formula <hit dice max>+(CON-10)/2, rounded down.
          */
-        switch (hitdie) {
-            case D6:
-                healthPoints = 6 + this.asModifier(AbilityScores.CON);
-                break;
-            case D8:
-                healthPoints = 8 + this.asModifier(AbilityScores.CON);
-                break;
-            case D10:
-                healthPoints = 10 + this.asModifier(AbilityScores.CON);
-                break;
-            default: // Treated as D12
-                healthPoints = 12 + this.asModifier(AbilityScores.CON);
-                break;
-        }
-        this.hp = healthPoints;
+        this.hp = switch (hitdie) {
+            case D6 -> 6 + this.asModifier(AbilityScores.CON);
+            case D8 -> 8 + this.asModifier(AbilityScores.CON);
+            case D10 -> 10 + this.asModifier(AbilityScores.CON);
+            default -> 12 + this.asModifier(AbilityScores.CON); // Treated as D12
+        };
 
         // Armor Class
         this.armorClass = 10 + this.asModifier(AbilityScores.DEX);
