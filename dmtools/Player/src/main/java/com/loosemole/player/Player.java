@@ -7,21 +7,22 @@ import com.loosemole.commonclass.PlayerClass;
 import com.loosemole.common.character.Alignments;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Hello world!
  */
 public class Player {
     private String name;
-    private HashMap<PlayerClass, Integer> classesMap = new HashMap<PlayerClass, Integer>();
+    private HashMap<PlayerClass, Integer> classesMap = new HashMap<>();
     private PlayerRace pRace;
-    private HashMap<Enum<AbilityScores>, Integer> abilityScoreMap = new HashMap<Enum<AbilityScores>, Integer>();
+    private HashMap<Enum<AbilityScores>, Integer> abilityScoreMap = new HashMap<>();
     private Enum<Alignments> alignment;
     private int profBonus = 0;
     private int inspiration = 0;
     private int armorClass = 10;
     private int initiativeBonus = 0;
-    private int HP = 10;
+    private int hp = 10;
     private int speed = 30;
 
     public Player(String name) {
@@ -43,21 +44,25 @@ public class Player {
     private void calculateStats() {
         // Base HP
         DiceTypes hitdie = DiceTypes.D10; // TODO get hit-die from player's first class
-        int hp;
+        int healthPoints;
         /*
         5e starting hp is calculated with the formula <hitdie-max>(CON-10)/2, rounded down.
          */
         switch (hitdie) {
             case D6:
-                hp = 6 + this.asModifier(AbilityScores.CON);
+                healthPoints = 6 + this.asModifier(AbilityScores.CON);
+                break;
             case D8:
-                hp = 8 + this.asModifier(AbilityScores.CON);
+                healthPoints = 8 + this.asModifier(AbilityScores.CON);
+                break;
             case D10:
-                hp = 10 + this.asModifier(AbilityScores.CON);
+                healthPoints = 10 + this.asModifier(AbilityScores.CON);
+                break;
             default: // Treated as D12
-                hp = 12 + this.asModifier(AbilityScores.CON);
+                healthPoints = 12 + this.asModifier(AbilityScores.CON);
+                break;
         }
-        this.HP = hp;
+        this.hp = healthPoints;
 
         // Armor Class
         this.armorClass = 10 + this.asModifier(AbilityScores.DEX);
@@ -71,7 +76,7 @@ public class Player {
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        // System.out.println("Hello World!");
     }
 
     public int getProfBonus() {
@@ -106,12 +111,12 @@ public class Player {
         this.initiativeBonus = initiativeBonus;
     }
 
-    public int getHP() {
-        return HP;
+    public int getHp() {
+        return this.hp;
     }
 
-    public void setHP(int HP) {
-        this.HP = HP;
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
     public int getSpeed() {
@@ -146,7 +151,7 @@ public class Player {
         this.alignment = alignment;
     }
 
-    public HashMap<Enum<AbilityScores>, Integer> getAbilityScoreMap() {
+    public Map<Enum<AbilityScores>, Integer> getAbilityScoreMap() {
         return abilityScoreMap;
     }
 
@@ -154,7 +159,7 @@ public class Player {
         this.abilityScoreMap = abilityScoreMap;
     }
 
-    public HashMap<PlayerClass, Integer> getClassesMap() {
+    public Map<PlayerClass, Integer> getClassesMap() {
         return classesMap;
     }
 
