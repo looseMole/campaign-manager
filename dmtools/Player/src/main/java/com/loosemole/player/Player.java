@@ -14,7 +14,8 @@ import java.util.Map;
  */
 public class Player {
     private String name;
-    private HashMap<PlayerClass, Integer> classesMap = new HashMap<>();
+    private HashMap<PlayerClass, Integer> classesMap = new HashMap<>(); // Class, level
+    private final PlayerClass primaryClass;
     private PlayerRace pRace;
     private HashMap<Enum<AbilityScores>, Integer> abilityScoreMap = new HashMap<>();
     private Enum<Alignments> alignment;
@@ -37,7 +38,15 @@ public class Player {
         this.abilityScoreMap.put(AbilityScores.INT, 10);
         this.abilityScoreMap.put(AbilityScores.WIS, 10);
         this.abilityScoreMap.put(AbilityScores.CHA, 10);
-        this.classesMap.put(new PlayerClass("Fighter"), 1);
+        PlayerClass primaryClass = new PlayerClass("Fighter", DiceTypes.D10); // TODO: Don't create a new class everytime they're used. Create a component(?) for this.
+        this.primaryClass = primaryClass;
+        this.classesMap.put(primaryClass, 1);
+        this.calculateStats();
+    }
+
+    /*
+    Factory pattern constructor for a Player object. Recommended
+        this.classesMap.put(new PlayerClass("Fighter", DiceTypes.D10), 1);
         this.calculateStats();
     }
 
@@ -51,16 +60,16 @@ public class Player {
      */
     private void calculateStats() {
         // Base HP
-        DiceTypes hitdie = DiceTypes.D10; // TODO get hit-die from player's first class
+        DiceTypes hitDie = this.primaryClass.getHitDie();
 
         /*
         5e starting hp is calculated with the formula <hit dice max>+(CON-10)/2, rounded down.
          */
-        this.hp = switch (hitdie) {
+        this.hp = switch (hitDie) {
             case D6 -> 6 + this.asModifier(AbilityScores.CON);
             case D8 -> 8 + this.asModifier(AbilityScores.CON);
             case D10 -> 10 + this.asModifier(AbilityScores.CON);
-            default -> 12 + this.asModifier(AbilityScores.CON); // Treated as D12
+            default -> 12 + this.asModifier(AbilityScores.CON); // The default is treated as a D12
         };
 
         // Armor Class
