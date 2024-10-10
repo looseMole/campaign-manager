@@ -21,3 +21,5 @@ Questions:
 - Should the individual types of currency be considered items?
 - Should there be some basic implementations of these interfaces in the common module?
 - Should there be a Weapon interface? What about improvised weapons?
+- Could the "magic item interface" be broken up, into more narrow uses, like has/doesCertainEffect?
+  In that case, it would not be specific to magic items only, but also explosives, for instance.
