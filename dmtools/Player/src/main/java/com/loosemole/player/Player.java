@@ -9,9 +9,6 @@ import com.loosemole.common.character.Alignments;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Hello world!
- */
 public class Player {
     private String name;
     private HashMap<PlayerClass, Integer> classesMap = new HashMap<>(); // Class, level
@@ -41,12 +38,6 @@ public class Player {
         PlayerClass primaryClass = new PlayerClass("Fighter", DiceTypes.D10); // TODO: Don't create a new class everytime they're used. Create a component(?) for this.
         this.primaryClass = primaryClass;
         this.classesMap.put(primaryClass, 1);
-        this.calculateStats();
-    }
-
-    /*
-    Factory pattern constructor for a Player object. Recommended
-        this.classesMap.put(new PlayerClass("Fighter", DiceTypes.D10), 1);
         this.calculateStats();
     }
 
