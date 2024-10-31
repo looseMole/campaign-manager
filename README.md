@@ -1,2 +1,2 @@
 # campaign-manager
-For all your tabletop needs
+For ~~all~~ some of ~~your~~ my tabletop needs
