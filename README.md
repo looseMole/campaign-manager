@@ -11,6 +11,11 @@ Alignments, Inventories, Locations, etc. of all of these, for some "quick and ea
 This project is currently in a very early stage, and has no features to brag about - but I'll try to keep the README
 updated, as I go along :)
 
+# Git Branching Strategy
+Though it has not been followed at all thus far, it is one of the many goals of this project to demonstrate a thought-out
+and "correct" git strategy. 
+This project should as best as possible, follow GitHub's take on GitFlow: [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow).
+
 # Design decisions
 Various design decisions which has been made:
 **Modular architecture** the entire app is, to the best of my ability, made modular using the JPMS framework, and Java's
