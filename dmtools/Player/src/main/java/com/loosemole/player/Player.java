@@ -1,14 +1,11 @@
 package com.loosemole.player;
 
-import com.loosemole.common.character.Sizes;
-import com.loosemole.common.character.Skills;
 import com.loosemole.common.dice.DiceTypes;
 import com.loosemole.commonrace.PlayerRace;
 import com.loosemole.common.character.AbilityScores;
 import com.loosemole.commonclass.PlayerClass;
 import com.loosemole.common.character.Alignments;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,8 +15,6 @@ public class Player {
     private final PlayerClass primaryClass;
     private PlayerRace pRace;
     private HashMap<Enum<AbilityScores>, Integer> abilityScoreMap = new HashMap<>();
-    private HashMap<Enum<AbilityScores>, Integer> savingThrowBonusMap = new HashMap<>();
-    private HashMap<Enum<Skills>, Integer> skillBonusMap = new HashMap<>();
     private Enum<Alignments> alignment;
     private int profBonus = 0;
     private int inspiration = 0;
@@ -27,16 +22,6 @@ public class Player {
     private int initiativeBonus = 0;
     private int hp = 10;
     private int speed = 30;
-    private int xp = 0;
-    private int passive_perception;
-    private Sizes size;
-    private int failed_death_saves = 0;
-    private int succeeded_death_saves = 0;
-    private AbilityScores spellCastingAbility;
-    private int spellsaveDc;
-    private ArrayList<Spell> spellList; // TODO: Create a Spell class
-    private ArrayList<Feat> featList; // TODO: Create a Feat class
-    private String desc; // To hold any additional hard-to-quantify info about the character like their backstory and visual features.
 
     /*
     Minimal constructor for a Player object. Not recommended for use in production.
@@ -83,15 +68,6 @@ public class Player {
 
         // Initiative
         this.initiativeBonus = 10 + this.asModifier(AbilityScores.DEX);
-    }
-
-    /*
-    Should calculate the bonuses for each skill, based on the respective Ability they are tied to.
-    TODO: Move the logic of pairing skills with abilities from the Player class. This is not the Player's responsibility.
-     */
-    private void calculateSkillsBonuses() {
-        // TODO: Implement this method
-        throw new UnsupportedOperationException();
     }
 
     private int asModifier(AbilityScores abilityScore) {
